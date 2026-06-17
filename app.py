@@ -7,6 +7,11 @@ from flask_jwt_extended import JWTManager
 
 from config import Config
 from models import DB
+from routes.auth import auth_bp
+from routes.jobs import jobs_bp
+from routes.applications import applications_bp
+from routes.recruiter import recruiter_bp
+from routes.admin import admin_bp
 
 
 logging.basicConfig(level=logging.INFO)
@@ -32,6 +37,16 @@ def create_app():
             app.logger.info("Database tables ensured")
         except Exception:
             app.logger.exception("Database error")
+
+    app.register_blueprint(auth_bp, url_prefix="/api/auth")
+    app.register_blueprint(jobs_bp, url_prefix="/api/jobs")
+    app.register_blueprint(applications_bp, url_prefix="/api/applications")
+    app.register_blueprint(recruiter_bp, url_prefix="/api/recruiter")
+    app.register_blueprint(admin_bp, url_prefix="/api/admin")
+
+    @app.route("/")
+    def health():
+        return "Backend running"
 
     return app
 
