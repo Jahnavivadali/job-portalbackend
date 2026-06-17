@@ -29,10 +29,8 @@ def register():
 
     if not name:
         errors["name"] = "Username is required."
-    elif len(name) < 3:
-        errors["name"] = "Username must be at least 3 characters."
-    elif User.query.filter_by(name=name).first():
-        errors["name"] = "Username already exists."
+    elif len(name) < 2:
+        errors["name"] = "Username must be at least 2 characters."
 
     if not email:
         errors["email"] = "Email is required."
