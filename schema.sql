@@ -1,0 +1,44 @@
+CREATE DATABASE IF NOT EXISTS jobportal;
+USE jobportal;
+
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(120) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  role VARCHAR(20) NOT NULL DEFAULT 'candidate',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS companies (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  company_name VARCHAR(150) NOT NULL,
+  website VARCHAR(255),
+  location VARCHAR(150),
+  description TEXT,
+  recruiter_id INT NOT NULL,
+  FOREIGN KEY (recruiter_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS jobs (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(150) NOT NULL,
+  description TEXT NOT NULL,
+  location VARCHAR(150),
+  salary VARCHAR(100),
+  skills TEXT,
+  company_id INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (company_id) REFERENCES companies(id)
+);
+
+CREATE TABLE IF NOT EXISTS applications (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  job_id INT NOT NULL,
+  resume_path VARCHAR(255),
+  status VARCHAR(30) DEFAULT 'Applied',
+  applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (job_id) REFERENCES jobs(id)
+);
