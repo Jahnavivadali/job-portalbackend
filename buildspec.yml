@@ -4,4 +4,6 @@ phases:
   install:
     commands:
       - pip install -r requirements.txt
-
+  build:
+    commands:
+      - python -m py_compile app.py
