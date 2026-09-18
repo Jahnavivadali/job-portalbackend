@@ -18,7 +18,6 @@ job-portalbackend/
 ├── Dockerfile
 ├── .dockerignore
 └── README.md
-```
 
 ## Docker
 
