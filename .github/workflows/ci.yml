@@ -25,7 +25,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Test application
-        run: python -m py_compile app.py
+        run: python -m py_compile wrong_app.py
         
       - name: Build Docker image
         run: docker build -t job-portal-backend .
