@@ -105,6 +105,41 @@ Available tags:
 
 * `latest`
 * `v1.0`
+  ## Pipeline
+
+This project uses both **GitHub Actions** and **AWS CodePipeline** to automate the build and validation process.
+
+### GitHub Actions
+
+GitHub Actions is used for continuous integration. When changes are pushed to the `main` branch, the GitHub Actions workflow is triggered automatically. The workflow checks out the source code, installs the required dependencies, and performs the configured build or validation steps. This helps verify that the application can be processed correctly after a code change.
+
+### AWS CodePipeline
+
+AWS CodePipeline provides an automated pipeline in AWS. The source stage is connected to the GitHub repository using an AWS CodeConnections connection. When a new commit is pushed to the `main` branch, CodePipeline detects the change and starts a pipeline execution.
+
+The source code is then passed to **AWS CodeBuild** for the build stage. CodeBuild reads the `buildspec.yml` file from the repository and executes the commands defined in it. The build process installs the required Python dependencies and performs the configured build or validation tasks.
+
+### How They Work Together
+
+GitHub Actions provides continuous integration checks for the repository, while AWS CodePipeline manages the AWS-based source and build process. When code is updated in GitHub, the workflows can automatically process the new changes. This reduces manual work and provides a consistent and repeatable development workflow.
+
+The overall pipeline flow is:
+
+```text
+Developer Push
+      ↓
+GitHub Repository
+      ↓
+GitHub Actions
+      ↓
+AWS CodePipeline
+      ↓
+AWS CodeConnections
+      ↓
+AWS CodeBuild
+      ↓
+Build and Validation
+```
 
 ## Docker Workflow
 
