@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from secrets_manager import get_database_credentials
+from secrets_manages import get_database_credentials
 
 load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
