@@ -11,6 +11,7 @@ from routes.jobs import jobs_bp
 from routes.applications import applications_bp
 from routes.recruiter import recruiter_bp
 from routes.admin import admin_bp
+from secrets_manager import get_database_credentials
 
 
 logging.basicConfig(level=logging.INFO)
