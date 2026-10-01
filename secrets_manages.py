@@ -11,6 +11,4 @@ def get_database_credentials():
         SecretId="prod/myapp/rds-database"
     )
 
-    secret = json.loads(response["SecretString"])
-
-    return secret
+    return json.loads(response["SecretString"])
